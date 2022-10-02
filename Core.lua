@@ -8,6 +8,7 @@ function Dictionary:OnInitialize()
   self:RegisterChatCommand("dictionary", "SlashCommand")
 -- load dictionary file
   DictionaryMap = DictionaryMap or {}
+  self:merge()
 end
 
 function Dictionary:OnEnable()
@@ -39,5 +40,12 @@ function Dictionary:SlashCommand(msg)
     end
   else
     self:Print("You mast input words")
+  end
+end
+
+-- merge dictionary
+function Dictionary:merge()
+  for k, v in pairs(DefaultDictionary) do
+    DictionaryMap[k] = v
   end
 end
