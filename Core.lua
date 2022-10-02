@@ -2,10 +2,12 @@ Dictionary = LibStub("AceAddon-3.0"):NewAddon("Dictionary", "AceConsole-3.0", "A
 
 function Dictionary:OnInitialize()
 -- Called when the addon is loaded
-  self:Print("Hello World!")
+  self:Print("dictionary has inited")
 -- register chat commands
   self:RegisterChatCommand("dic", "SlashCommand")
   self:RegisterChatCommand("dictionary", "SlashCommand")
+-- load dictionary file
+  DictionaryMap = DictionaryMap or {}
 end
 
 function Dictionary:OnEnable()
@@ -27,9 +29,15 @@ function Dictionary:ZONE_CHANGED()
 end
 
 function Dictionary:SlashCommand(msg) 
-  if msg == "ping" then
-    self:Print("pong")
+  if msg then
+    local explaination = DictionaryMap[msg]
+    if explaination == nil then
+      self:Print("cannot find word in dictionary, cache \"", msg,  "\" in dictionary. Wait to search after quit game.")
+    DictionaryMap[msg] = ""
+    else
+      self:Print(msg, " means: ", explaination)
+    end
   else
-    self:Print("hello there: ", msg)
+    self:Print("You mast input words")
   end
 end
