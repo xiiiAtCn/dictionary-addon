@@ -3,5 +3,8 @@
     "GetBindLocation",
     "GetZoneText",
     "GetSubZoneText"
+  ],
+  "python.analysis.extraPaths": [
+    "./Parser"
   ]
 }
